@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width; height=device-height; maximum-scale=1.4; initial-scale=1.0; user-scalable=yes"/>
+	<title>Darshil Patel Calculator</title>
+
+
+
+  <style>
+
+  body{
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+  background: #333 url('https://images.unsplash.com/photo-1444927714506-8492d94b4e3d?crop=entropy&fit=crop&fm=jpg&h=675&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1025') center center no-repeat;
+    background-size: cover;
+    color: #532827;
+}  
+
+form{
+
+  text-align: right;
+}
+
+form input, 
+form select{
+  padding: 8px;
+  margin: 10px 0;
+}
+form input [type="text"]{
+  width: 90px;
+}
+input{
+  background:#7E858B;
+  color: white;
+  border: none;
+  border-bottom: solid 4px #222;
+
+  font-size: 18px;
+  padding: 20px 30px;
+  width: 100%;
+}
+
+input:hover{
+  background: #ABD4C1;
+  border-bottom-color: #111;
+}
+input:active{
+  position: relative;
+  top: 1px;
+
+
+}
+
+.c-input {
+font-size: 20px;
+width: 200px;
+margin-bottom: 5px;
+height: 35px;
+vertical-align: middle;
+background: #fff;
+border: 1px solid #d9d9d9;
+border-top: 1px solid #c0c0c0;
+-moz-border-radius: 1px;
+-webkit-border-radius: 1px;
+border-radius: 1px;
+padding: 0.5px 0px 0.5px 5px;
+color: black;
+}
+
+td{
+    padding-right: 15px;
+}
+
+#container {
+    width: 400px;
+    margin: 40px auto 0;
+    padding: 50px;
+    box-sizing: border-box;
+    background: url('http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/tree_bark.png') top left repeat;
+    box-shadow: 0 10px 15px -8px #000;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+input#output{
+width: 280px
+}
+
+
+
+
+  </style>
+
+
+</head>
+<body>
+
+<div id="container">
+<form name="calculatorMain" action="">
+	<input name="screenValue" id="output" type="Text" value="0" class="c-input" readonly style=" text-align: right;">
+	<table class="buttons">
+      <tr>
+      <td><input id="memorySave" type="button" value="  sin  " onclick="runSin()"></td>
+      <td><input id="squareRoot" type="button" value="  cos  " onclick="runCos()"></td>
+      <td><input id="sinNumber" type="button" value="  tan  " onclick="runTan()"></td>
+      <td colspan="2"><input id="powerTo" type="button" value="  ^  " onclick="Operation('5')"></td>
+    </tr>
+    <tr>
+      <td><input id="memorySave" type="button" value="  MS  " onclick="runmemorySave()"></td>
+            <td><input id="memoryRecall" type="button" value="  MR  " onclick="runmemoryRecall()"></td>
+      <td><input id="squaredRoot" type="button" value="  &radic;  " onclick="squareRootFunction()"></td>
+      <td><input id="runPercent" type="button" value="  %  " onclick="Operation('%')"></td>
+
+    </tr>
+      <tr>
+      <td><input id="clearallButton" type="button" value="  CE  " onclick="clearEntry()"></td>
+      <td><input id="clear" type="button" value="  C  " onclick="Clear()"></td>
+      <td><input id="delete" type="button" value="  del " onclick="deleteChar()"></td>
+      <td colspan="2"><input id="buttonDivide" type="button" value="  /  " onclick="Operation('/')"></td>
+    </tr>
+		<tr>
+			<td><input id="button7" type="button" value="  7  " onclick="numberInput(7)"></td>
+			<td><input id="button8" type="button" value="  8  " onclick="numberInput(8)"></td>
+			<td><input id="button9" type="button" value="  9  " onclick="numberInput(9)"></td>
+            <td><input id="buttonPlus" type="button" value="   *   " onclick="Operation('*')"></td>
+		</tr>
+		<tr>
+			<td><input id="button4" type="button" value="  4  " onclick="numberInput(4)"></td>
+			<td><input id="button5" type="button" value="  5  " onclick="numberInput(5)"></td>
+			<td><input id="button6" type="button" value="  6  " onclick="numberInput(6)"></td>
+			<td><input id="buttonMinus" type="button" value="  -  " onclick="Operation('-')"></td>
+		</tr>
+		<tr>
+            <td><input id="button1" type="button" value="  1  " onclick="numberInput(1)"></td>
+            <td><input id="button2" type="button" value="  2  " onclick="numberInput(2)"></td>        
+            <td><input id="button3" type="button" value="  3  " onclick="numberInput(3)"></td>
+            <td><input id="buttonPlus" type="button" value="  +  " onclick="Operation('+')"></td>
+
+        </tr>
+                 <tr>
+            <td><input id="plusMinus" type="button" value=" +/- " onclick="Neg()"></td>
+            <td><input id="button0" type="button" value="  0  " onclick="numberInput(0)"></td>        
+            <td><input id="decimal" type="button" value="  .  " onclick="runDecimal()"></td>
+            <td><input id="buttonEqual" type="button" value="   =   " onclick="Operation('=')"></td>
+            
+        </tr>
+	</table>
+
+</form>
+</div>
+
+<script type="text/javascript">
+
+
+document.addEventListener('keydown', function(event) {
+    if(event.keyCode == 49 || event.keyCode == 97) {
+        numberInput(1);
+    }
+    else if(event.keyCode == 50 || event.keyCode == 98) {
+        numberInput(2);
+    } else if(event.keyCode == 51 || event.keyCode == 99) {
+        numberInput(3);
+    }else if(event.keyCode == 52 || event.keyCode == 100) {
+        numberInput(4);
+    }else if(event.keyCode == 53 || event.keyCode == 101) {
+        numberInput(5);
+    }else if(event.keyCode == 54 || event.keyCode == 102) {
+        numberInput(6);
+    }else if(event.keyCode == 55 || event.keyCode == 103) {
+        numberInput(7);
+    }else if(event.keyCode == 56 || event.keyCode == 104) {
+        numberInput(8);
+    }else if(event.keyCode == 57|| event.keyCode == 105) {
+        numberInput(9);
+    } else if(event.keyCode == 48 || event.keyCode == 96) {
+        numberInput(0);
+    } else if(event.keyCode == 107) {
+        Operation('+');
+    } else if(event.keyCode == 189 || event.keyCode == 109) {
+        Operation('-');
+    } else if(event.keyCode == 106 ) {
+        Operation('*');
+    } else if(event.keyCode == 191 || event.keyCode == 111) {
+        Operation('/');
+    } else if(event.keyCode == 13 || event.keyCode == 187) {
+        Operation('=');
+    } else if(event.keyCode == 190 ) {
+        runDecimal();
+    } else if(event.keyCode == 8 || event.keyCode == 46 || event.keyCode == 110) {
+        deleteChar();
+    } else if(event.keyCode == 67 ) {
+        clearEntry();
+    } 
+});
+	   var evaluateCos;
+    var evaluateSin;
+    var powerRun;
+      var evaluateSquareRoot;
+      var saevdMemory;
+    
+      var powerRunFinalValue;
+
+
+var inputedValue = document.calculatorMain; // saves the value in the form calculatorMain to a variable -- Unused Variable
+var finalValue = 0 ; 	// uses this variable to save the parseFloat value
+var operationCheck = false; //checks if the operator is inputed or not
+var operatorValue = ""; // sets the value of the operator to empty. later changed to a value
+ 
+ function numberInput (Num){
+ 	if (operationCheck) { //if an operator is inserted than it will run this.
+ 		calculatorMain.screenValue.value = Num; // sets the value of the display to the number clicked. Will only run once
+ 		operationCheck = false; // makes sure this does not run and it links to the else else statement. !!! Connection Sent - After operator is clicked
+ 	} else {
+ 			if (calculatorMain.screenValue.value == "0") // checks if the value of the display is 0
+ 				calculatorMain.screenValue.value = Num; // if it is 0 it will set the value to the number clicked
+ 			else
+ 			calculatorMain.screenValue.value += Num; // if a number has been already inputted than it will add onto the string. ex. 55 = 5+=5 !!!Connection Received Here
+ 	}
+ }
+
+  function Operation(Op){
+  	var calcVal = calculatorMain.screenValue.value; // saves the value of the string to a variable
+  
+
+
+  	if(powerRun == 5 && operationCheck && operatorValue != "=" );// checks if the user is not input is not = 
+  	{
+  		operationCheck = true; // sets the boolean to true
+  		if ('+' == operatorValue){ // looks to check if the operator is a + 
+  			finalValue += parseFloat(calcVal); //saves the value as a variable in int format
+      }
+  		 else if ('-' == operatorValue){ // similar as above
+  			finalValue -= parseFloat(calcVal);
+      }
+  		  else if('*' == operatorValue){ 
+  		  	finalValue *= parseFloat(calcVal);
+        }
+  		  else if('/' == operatorValue){
+  		   	finalValue /=parseFloat(calcVal); 
+         }
+  		   else if('%' == operatorValue){
+  		   	finalValue %=parseFloat(calcVal);
+         } else if (operatorValue == 5){
+       powerRunFinalValue = Math.pow(calcVal, finalValue);
+        finalValue = powerRunFinalValue;
+
+      }
+
+         else {
+  		   		finalValue = parseFloat(calcVal); // saves the finalvaluable variable as a int
+         }
+  		   	calculatorMain.screenValue.value = finalValue;  // prints it to the text field
+
+  		   	operatorValue = Op;	// uses the operator inputed before to do the calcualation
+  	}
+  }
+
+
+
+
+            function Clear(){
+            	calculatorMain.screenValue.value = "0"; // sets the value to 0. The value that is inputed after the operator is clicked
+            }
+
+              function powerRunFinal(){
+                      powerRunFinalValue= Math.pow(powerRun, calculatorMain.screenValue.value);
+                      calculatorMain.screenValue.value = powerRunFinalValue;
+
+              }
+
+
+    function runCos() {
+      evaluateCos = Math.cos( calculatorMain.screenValue.value);
+      calculatorMain.screenValue.value = evaluateCos;
+
+    }
+
+
+     function runTan() {
+      evaluateCos = Math.tan( calculatorMain.screenValue.value);
+      calculatorMain.screenValue.value = evaluateCos;
+
+    }
+    
+    function runSin() {
+      evaluateSin = Math.sin( calculatorMain.screenValue.value);
+        calculatorMain.screenValue.value = evaluateSin;
+    }
+
+    function deleteChar() {
+      calculatorMain.screenValue.value = calculatorMain.screenValue.value.substring(0,calculatorMain.screenValue.value.length - 1)
+    }
+
+
+  function runDecimal(){
+      calculatorMain.screenValue.value += ".";
+    }
+            function ClearFinal () {
+                 calculatorMain.screenValue.value = "0";
+                operationCheck = true;
+                   finalValue = 0;
+                operatorValue = "";
+            }
+            function clearEntry () {
+             
+                ClearFinal();
+            }
+
+
+    function squareRootFunction(){
+      evaluateSquareRoot = Math.sqrt(calculatorMain.screenValue.value);
+      calculatorMain.screenValue.value = evaluateSquareRoot;
+    }
+
+    
+
+    function runmemorySave (){
+    saevdMemory  = calculatorMain.screenValue.value;
+    
+    calculatorMain.screenValue.value = "0";	
+    }
+    function runmemoryRecall(){
+    	if ('+' == operatorValue) // looks to check if the operator is a + 
+  			finalValue += parseFloat(saevdMemory); //saves the value as a variable in int format
+  		 else if ('-' == operatorValue) // similar as above
+  			finalValue -= parseFloat(saevdMemory);
+  		  else if('*' == operatorValue) 
+  		  	finalValue *= parseFloat(saevdMemory);
+  		  else if('/' == operatorValue)
+  		   	finalValue /=parseFloat(saevdMemory);
+  		   else if('%' == operatorValue)
+  		   	finalValue %=parseFloat(saevdMemory);
+
+
+      calculatorMain.screenValue.value = finalValue
+    }
+
+
+     function Neg () {
+          inputedValue.screenValue.value = parseFloat(inputedValue.screenValue.value) * -1; // makes the input in the text field negative
+            }
+
+
+
+</script>
+
+
+</body>
+</html>
